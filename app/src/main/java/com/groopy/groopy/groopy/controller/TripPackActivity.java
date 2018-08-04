@@ -1,7 +1,9 @@
-package com.groopy.groopy.groopy;
+package com.groopy.groopy.groopy.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.groopy.groopy.groopy.R;
 
 public class TripPackActivity extends AppCompatActivity
 {
