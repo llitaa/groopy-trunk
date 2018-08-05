@@ -1,7 +1,7 @@
 package com.groopy.groopy.groopy.model;
 
 //! Class that represents single trip package
-class PackItem
+public class PackItem
 {
     public PackItem(String name)
     {

@@ -1,18 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controller.TripPackActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="com.groopy.groopy.groopy.model.TripPackage" />
+
+        <variable
+            name="tripPackage"
+            type="com.groopy.groopy.groopy.model.TripPackage" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        tools:context=".controller.TripPackActivity">
 
-</android.support.constraint.ConstraintLayout>
+        <include
+            android:id="@+id/tripPackage"
+            layout="@layout/trip_package_view" />
+    </LinearLayout>
+
+</layout>

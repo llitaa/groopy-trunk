@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="tripPackage"
+            type="com.groopy.groopy.groopy.model.TripPackage" />
+    </data>
+
+    <com.groopy.groopy.groopy.ui.TripPackageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Tenerife" />
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/packItems"-->
+            <!--app:tripPackageList="@{tripPackage.items}"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/packItems"
+            app:tripPackageList="@{tripPackage}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.groopy.groopy.groopy.ui.TripPackageView>
+
+    <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:text="Tenerife" />-->
+
+        <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/employees"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:personList="@{tripPackage.getItems}" />&ndash;&gt;-->
+
+
+    <!--</LinearLayout>-->
+
+</layout>

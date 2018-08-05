@@ -11,6 +11,9 @@ public class TripPackage
         _name = name;
         _items = new ArrayList<>();
         _description = null;
+
+        // TODO remove this after default list generation logic will be implemented
+        _items = createDefaultItems();
     }
 
     public String getName()
@@ -41,6 +44,19 @@ public class TripPackage
     public void setDescription(String description)
     {
         _description = description;
+    }
+
+    static private ArrayList<PackItem> createDefaultItems()
+    {
+        ArrayList<PackItem> res = new ArrayList<>();
+        for (int i = 0; i < 20; ++i)
+        {
+            String countStr = Integer.toString(i);
+            PackItem item = new PackItem("Item " + countStr);
+            item.setDescription("Description of item " + countStr);
+            res.add(item);
+        }
+        return res;
     }
 
     private String _name;
