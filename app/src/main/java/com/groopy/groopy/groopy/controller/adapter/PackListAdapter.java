@@ -46,6 +46,8 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
 
         TextView tw = (TextView) LayoutInflater.from(parent.getContext())
             .inflate(R.layout.pack_item_view, parent, false);
+
+        // tw.setText("Lol Kek");
         ViewHolder vh = new ViewHolder(tw);
         return vh;
     }

@@ -2,6 +2,10 @@
 
     <data>
 
+        <import type="java.util.List" />
+        <import type="com.groopy.groopy.groopy.model.TripPackage" />
+        <import type="com.groopy.groopy.groopy.model.PackItem" />
+
         <variable
             name="packItem"
             type="com.groopy.groopy.groopy.model.PackItem" />
@@ -11,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
-        android:background="@android:color/white"
+        android:background="@android:color/darker_gray"
         android:text="Lol"
-        android:textColor="@android:color/holo_orange_dark" />
+        android:textColor="@android:color/holo_blue_bright" />
     <!--<TextView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -21,13 +25,4 @@
         <!--android:background="@android:color/white"-->
         <!--android:text="@{packItem.name}"-->
         <!--android:textColor="@android:color/holo_orange_dark" />-->
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="1dp"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:background="@android:color/white"-->
-        <!--android:text="@{packItem.description}"-->
-        <!--android:textColor="@android:color/darker_gray" />-->
 </layout>

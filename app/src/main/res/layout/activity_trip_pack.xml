@@ -9,7 +9,7 @@
         <import type="com.groopy.groopy.groopy.model.TripPackage" />
 
         <variable
-            name="tripPackage"
+            name="tripPackage1"
             type="com.groopy.groopy.groopy.model.TripPackage" />
     </data>
 
@@ -21,7 +21,8 @@
 
         <include
             android:id="@+id/tripPackage"
-            layout="@layout/trip_package_view" />
+            layout="@layout/trip_package_view"
+            bind:tripPackage="@{tripPackage1}" />
     </LinearLayout>
 
 </layout>

@@ -17,16 +17,16 @@ public class TripPackActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         // Inflate layout
         ActivityTripPackBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_pack);
-        binding.setTripPackage(new TripPackage("Tenerife Tour"));
-        binding.tripPackage.setTripPackage(new TripPackage("Tenerife Tour"));
+        binding.setTripPackage1(new TripPackage("Trip Name from Activity"));
+        // binding._tripPackage.setTripPackage(new TripPackage("Tenerife Tour 1"));
         _binding = binding;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        _binding.setTripPackage(new TripPackage("Tenerife Tour"));
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        _binding.setTripPackage(new TripPackage("Tenerife Tour"));
+//    }
 
     private ActivityTripPackBinding _binding;
 }
