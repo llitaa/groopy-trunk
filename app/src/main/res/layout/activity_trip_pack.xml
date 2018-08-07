@@ -19,10 +19,15 @@
         android:orientation="vertical"
         tools:context=".controller.TripPackActivity">
 
+        <!--<include-->
+            <!--android:id="@+id/tripPackage"-->
+            <!--layout="@layout/trip_package_view"-->
+            <!--bind:tripPackage="@{tripPackage1}" />-->
+
         <include
-            android:id="@+id/tripPackage"
             layout="@layout/trip_package_view"
             bind:tripPackage="@{tripPackage1}" />
+
     </LinearLayout>
 
 </layout>

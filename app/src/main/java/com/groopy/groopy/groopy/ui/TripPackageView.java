@@ -10,10 +10,8 @@ import android.widget.LinearLayout;
 import com.groopy.groopy.groopy.model.TripPackage;
 import com.groopy.groopy.groopy.databinding.TripPackageViewBinding;
 
-public class TripPackageView extends LinearLayout
-{
-    public TripPackageView(Context context, @Nullable AttributeSet attrs)
-    {
+public class TripPackageView extends LinearLayout {
+    public TripPackageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -30,9 +28,9 @@ public class TripPackageView extends LinearLayout
         // RecyclerView  itemsView = (RecyclerView) findViewById(R.id.packItems);
 
         // switchViewModel = new SwitchViewModel();
-    // _binding.setSwitchViewModel(switchViewModel);
-    // _binding.setListeners(this);
-}
+        // _binding.setSwitchViewModel(switchViewModel);
+        // _binding.setListeners(this);
+    }
 
     private TripPackageViewBinding _binding;
     private TripPackage _tripPackage;

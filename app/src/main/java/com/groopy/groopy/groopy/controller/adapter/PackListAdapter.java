@@ -15,22 +15,20 @@ import com.groopy.groopy.groopy.BR;
 import com.groopy.groopy.groopy.R;
 import com.groopy.groopy.groopy.databinding.PackItemViewBinding;
 import com.groopy.groopy.groopy.model.PackItem;
+import com.groopy.groopy.groopy.ui.PackItemView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHolder>
-{
+public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHolder> {
     private final LayoutInflater _inflater;
     private List<PackItem> _packItems = new ArrayList<>();
 
-    public PackListAdapter(Context context)
-    {
+    public PackListAdapter(Context context) {
         this._inflater = LayoutInflater.from(context);
     }
 
-    public void update(List<PackItem> list)
-    {
+    public void update(List<PackItem> list) {
         this._packItems.clear();
         this._packItems.addAll(list);
         notifyDataSetChanged();
@@ -38,54 +36,42 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
-        // Generate same view vor each pack item
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 //        ViewDataBinding binding = PackItemViewBinding.inflate(_inflater, parent, false);
 //        return new ViewHolder(binding.getRoot());
 
-        TextView tw = (TextView) LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.pack_item_view, parent, false);
-
-        // tw.setText("Lol Kek");
-        ViewHolder vh = new ViewHolder(tw);
-        return vh;
+        // Do not inflate anythinf, custom view inflates itself
+        PackItemView itemView = new PackItemView(parent.getContext());
+        // Customize view size
+        itemView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        ));
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(PackListAdapter.ViewHolder viewHolder, int position)
-    {
+    public void onBindViewHolder(PackListAdapter.ViewHolder viewHolder, int position) {
         PackItem packItem = _packItems.get(position);
-        // ViewDataBinding binding = viewHolder.getBinding();
-        // binding.setPackItem(packItem);
-        // binding.setVariable(BR.packItem, packItem);
-        // binding.executePendingBindings();
-        viewHolder._textView.setText(packItem.getName());
+        viewHolder.getPackItemView().setSourceData(packItem);
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return _packItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
-        public TextView _textView;
-        public ViewHolder(TextView itemView)
-        {
-            super(itemView);
-            _textView = itemView;
-        }
-        //        public ViewHolder(View itemView)
-//        {
-//            super(itemView);
-//        }
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public PackItemView _packItemView;
 
-//        public ViewDataBinding getBinding()
-//        {
-//            return DataBindingUtil.getBinding(itemView);
-//        }
+        public ViewHolder(View view) {
+            super(view);
+            _packItemView = (PackItemView) view;
+        }
+
+        public PackItemView getPackItemView() {
+            return _packItemView;
+        }
     }
 
 }

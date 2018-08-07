@@ -1,28 +1,32 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="java.util.List" />
-        <import type="com.groopy.groopy.groopy.model.TripPackage" />
-        <import type="com.groopy.groopy.groopy.model.PackItem" />
 
         <variable
             name="packItem"
             type="com.groopy.groopy.groopy.model.PackItem" />
     </data>
 
-    <TextView
+    <com.groopy.groopy.groopy.ui.TripPackageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="1dp"
-        android:background="@android:color/darker_gray"
-        android:text="Lol"
-        android:textColor="@android:color/holo_blue_bright" />
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="1dp"-->
-        <!--android:background="@android:color/white"-->
-        <!--android:text="@{packItem.name}"-->
-        <!--android:textColor="@android:color/holo_orange_dark" />-->
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/_itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@android:color/holo_blue_bright" />
+
+        <TextView
+            android:id="@+id/_itemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@android:color/holo_blue_bright"
+            android:textColor="@android:color/holo_blue_light" />
+    </com.groopy.groopy.groopy.ui.TripPackageView>
 </layout>
