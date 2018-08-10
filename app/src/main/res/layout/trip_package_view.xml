@@ -10,13 +10,6 @@
             type="com.groopy.groopy.groopy.model.TripPackage" />
     </data>
 
-
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/packItems"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--app:tripPackageList="@{tripPackage}" />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Tenerife" />
+            android:text="@{tripPackage.name}" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/packItems"

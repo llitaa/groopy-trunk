@@ -18,7 +18,6 @@ public class TripPackActivity extends AppCompatActivity
         // Inflate layout
         ActivityTripPackBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_pack);
         binding.setTripPackage1(new TripPackage("Trip Name from Activity"));
-        // binding._tripPackage.setTripPackage(new TripPackage("Tenerife Tour 1"));
         _binding = binding;
     }
 
