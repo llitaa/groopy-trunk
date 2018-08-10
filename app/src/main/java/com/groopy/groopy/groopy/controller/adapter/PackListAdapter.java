@@ -20,11 +20,13 @@ import com.groopy.groopy.groopy.ui.PackItemView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHolder> {
+public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHolder>
+{
     private final LayoutInflater _inflater;
     private List<PackItem> _packItems = new ArrayList<>();
 
-    public PackListAdapter(Context context) {
+    public PackListAdapter(Context context)
+    {
         this._inflater = LayoutInflater.from(context);
     }
 
@@ -36,11 +38,8 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        ViewDataBinding binding = PackItemViewBinding.inflate(_inflater, parent, false);
-//        return new ViewHolder(binding.getRoot());
-
-        // Do not inflate anythinf, custom view inflates itself
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         PackItemView itemView = new PackItemView(parent.getContext());
         // Customize view size
         itemView.setLayoutParams(new ViewGroup.LayoutParams(
@@ -51,26 +50,63 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(PackListAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(PackListAdapter.ViewHolder viewHolder, int position)
+    {
         PackItem packItem = _packItems.get(position);
-        viewHolder.getPackItemView().setSourceData(packItem);
+        viewHolder.initContext(packItem, position);
+    }
+
+    public void removeItem(int position)
+    {
+        _packItems.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void addItem(int position, PackItem item)
+    {
+        _packItems.add(position, item);
+        notifyItemInserted(position);
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return _packItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         public PackItemView _packItemView;
+        private View _removeItemView;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view)
+        {
             super(view);
             _packItemView = (PackItemView) view;
         }
 
-        public PackItemView getPackItemView() {
-            return _packItemView;
+        public void initListeners()
+        {
+            _removeItemView = _packItemView.getRemoveItemView();
+            if(_removeItemView != null)
+            {
+                _removeItemView.setOnClickListener(ViewHolder.this);
+            }
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            if (v == _removeItemView)
+            {
+                removeItem(ViewHolder.this.getAdapterPosition());
+            }
+        }
+
+        public void initContext(PackItem packItem, int position)
+        {
+            _packItemView.setSourceData(packItem);
+            initListeners();
         }
     }
 

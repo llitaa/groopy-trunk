@@ -1,6 +1,7 @@
 package com.groopy.groopy.groopy.controller.binder;
 
 import android.databinding.BindingAdapter;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -53,6 +54,7 @@ public class TripPackageViewBinder
             view.setAdapter(adapter);
         }
         adapter.update(list);
+        view.setItemAnimator(new DefaultItemAnimator());
     }
 
 }

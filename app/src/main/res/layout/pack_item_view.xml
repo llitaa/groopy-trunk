@@ -27,5 +27,14 @@
             android:layout_margin="1dp"
             android:background="@android:color/holo_blue_bright"
             android:textColor="@android:color/holo_blue_light" />
+
+        <Button
+            android:id="@+id/_removeButton"
+            android:text="Remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@android:color/holo_green_light" />
     </LinearLayout>
 </layout>
