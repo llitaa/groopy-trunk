@@ -5,9 +5,13 @@
 
     <data>
 
+        <!--<variable-->
+            <!--name="tripPackage"-->
+            <!--type="com.groopy.groopy.groopy.model.TripPackage" />-->
+
         <variable
             name="tripPackage"
-            type="com.groopy.groopy.groopy.model.TripPackage" />
+            type="com.groopy.groopy.groopy.viewModel.TripPackageViewModel" />
     </data>
 
     <LinearLayout
@@ -25,7 +29,7 @@
             android:id="@+id/packItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tripPackageList="@{tripPackage}" />
+            app:packItemsList="@{tripPackage.packItems}" />
     </LinearLayout>
 
 

@@ -10,7 +10,7 @@
 
         <variable
             name="tripPackage1"
-            type="com.groopy.groopy.groopy.model.TripPackage" />
+            type="com.groopy.groopy.groopy.viewModel.TripPackageViewModel" />
     </data>
 
     <LinearLayout
@@ -18,6 +18,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".controller.TripPackActivity">
+
+        <Button
+            android:id="@+id/_resetButton"
+            android:text="Reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@android:color/holo_green_dark"
+            android:textColor="@android:color/white" />
 
         <include
             layout="@layout/trip_package_view"
