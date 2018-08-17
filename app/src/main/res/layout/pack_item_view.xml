@@ -8,17 +8,38 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/_itemName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/holo_blue_bright" />
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/_removeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_delete" />
+
+            <TextView
+                android:id="@+id/_itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="@android:color/darker_gray"
+                android:textColor="@android:color/holo_blue_bright"
+                android:layout_toLeftOf="@+id/_removeButton" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/_itemDescription"
@@ -28,13 +49,5 @@
             android:background="@android:color/holo_blue_bright"
             android:textColor="@android:color/holo_blue_light" />
 
-        <Button
-            android:id="@+id/_removeButton"
-            android:text="Remove"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:background="@android:color/holo_red_dark"
-            android:textColor="@android:color/holo_green_light" />
     </LinearLayout>
 </layout>

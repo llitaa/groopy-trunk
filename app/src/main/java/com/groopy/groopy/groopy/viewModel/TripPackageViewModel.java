@@ -78,8 +78,22 @@ public class TripPackageViewModel extends ViewModel implements Observable
     public void setPackItems(List<PackItem> items)
     {
         this.packItems = items;
-        this.tripPackage.setItems(items);
+        this.tripPackage.setItems(this.packItems);
         notifyChange();
+    }
+
+    public void addItem(PackItem item, int position)
+    {
+        this.packItems.add(position, item);
+        this.tripPackage.setItems(this.packItems);
+        // notifyChange();
+    }
+
+    public void removeItem(int position)
+    {
+        this.packItems.remove(position);
+        this.tripPackage.setItems(this.packItems);
+        // notifyChange();
     }
 
     @Override

@@ -58,4 +58,14 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
         tripPackageVM.setPackItems(lpi);
     }
 
+    public void notifyPackItemRemoved(int position)
+    {
+        _tripPackage.removeItem(position);
+    }
+
+    public void notifyPackItemAdded(PackItem item, int position)
+    {
+        _tripPackage.addItem(item, position);
+    }
+
 }
