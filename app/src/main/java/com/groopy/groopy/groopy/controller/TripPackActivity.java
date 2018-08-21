@@ -60,12 +60,14 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
 
     public void notifyPackItemRemoved(int position)
     {
-        _tripPackage.removeItem(position);
+        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
+        tripPackageVM.removeItem(position);
     }
 
     public void notifyPackItemAdded(PackItem item, int position)
     {
-        _tripPackage.addItem(item, position);
+        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
+        tripPackageVM.addItem(item, position);
     }
 
 }
