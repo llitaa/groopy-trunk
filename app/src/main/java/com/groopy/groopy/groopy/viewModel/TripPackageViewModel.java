@@ -21,6 +21,11 @@ public class TripPackageViewModel extends ViewModel implements Observable
     // Trip package model
     private TripPackage tripPackage;
 
+    public TripPackageViewModel()
+    {
+        this("");
+    }
+
     public TripPackageViewModel(TripPackage tripPackage)
     {
         this.tripPackage = tripPackage;
