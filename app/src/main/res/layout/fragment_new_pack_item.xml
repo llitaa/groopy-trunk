@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
-    <TextView
+    <LinearLayout
         android:layout_width="300dp"
         android:layout_height="700dp"
-        android:text="New Item Fragment"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="New Item" />
+
+        <Button
+            android:id="@+id/_approveNewItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@android:color/holo_green_light"
+            android:text="Approve"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/_rejectNewItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@android:color/holo_red_light"
+            android:text="Reject"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

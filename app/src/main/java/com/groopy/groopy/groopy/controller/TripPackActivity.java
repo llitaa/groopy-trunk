@@ -19,14 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TripPackActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class TripPackActivity extends AppCompatActivity implements View.OnClickListener {
     // private TripPackageViewModel _tripPackage = null;
     private ActivityTripPackBinding _binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create view model
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
@@ -42,13 +40,26 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
         _binding.setTripPackage1(tripPackageVM);
     }
 
-    public void launchNewPackItemFragment()
-    {
+    public void onNewPackItemAddingCompleted() {
+        closeNewPackItemFragment();
+    }
+
+    private void launchNewPackItemFragment() {
         NewPackItemFragment npif = new NewPackItemFragment();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.newPackItemFragmentContainer, npif, "NewPackItemFragment");
         transaction.commit();
+    }
+
+    private void closeNewPackItemFragment() {
+        FragmentManager manager = getFragmentManager();
+        NewPackItemFragment frg = (NewPackItemFragment) manager.findFragmentById(R.id.newPackItemFragmentContainer);
+        if (frg != null) {
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.remove(frg);
+            transaction.commit();
+        }
     }
 
 //    @Override
@@ -58,8 +69,7 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
 //    }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
 //        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
 //        tripPackageVM.setName("Reseted");
 //        tripPackageVM.setDescription("No Description");
@@ -70,16 +80,17 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
         launchNewPackItemFragment();
     }
 
-    public void notifyPackItemRemoved(int position)
-    {
+    public void notifyPackItemRemoved(int position) {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
         tripPackageVM.removeItem(position);
     }
 
-    public void notifyPackItemAdded(PackItem item, int position)
-    {
+    public void notifyPackItemAdded(PackItem item) {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
-        tripPackageVM.addItem(item, position);
+        // TODO (LYT) add adapter to view model and avoid this call
+        List<PackItem> items = tripPackageVM.getPackItems();
+        // int size = tripPackageVM.getPackItems().size();
+        items.add(item);
+        tripPackageVM.setPackItems(items);
     }
-
 }

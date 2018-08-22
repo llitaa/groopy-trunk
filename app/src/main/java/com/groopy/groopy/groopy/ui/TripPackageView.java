@@ -24,12 +24,6 @@ public class TripPackageView extends LinearLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         _binding = DataBindingUtil.getBinding(this);
-
-        // RecyclerView  itemsView = (RecyclerView) findViewById(R.id.packItems);
-
-        // switchViewModel = new SwitchViewModel();
-        // _binding.setSwitchViewModel(switchViewModel);
-        // _binding.setListeners(this);
     }
 
     private TripPackageViewBinding _binding;
