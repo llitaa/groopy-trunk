@@ -1,5 +1,7 @@
 package com.groopy.groopy.groopy.controller;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -40,6 +42,15 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
         _binding.setTripPackage1(tripPackageVM);
     }
 
+    public void launchNewPackItemFragment()
+    {
+        NewPackItemFragment npif = new NewPackItemFragment();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.newPackItemFragmentContainer, npif, "NewPackItemFragment");
+        transaction.commit();
+    }
+
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
@@ -49,13 +60,14 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v)
     {
-        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
-        tripPackageVM.setName("Reseted");
-        tripPackageVM.setDescription("No Description");
-        PackItem pi = new PackItem("Reseted Item");
-        List<PackItem> lpi = new ArrayList<>();
-        lpi.add(pi);
-        tripPackageVM.setPackItems(lpi);
+//        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
+//        tripPackageVM.setName("Reseted");
+//        tripPackageVM.setDescription("No Description");
+//        PackItem pi = new PackItem("Reseted Item");
+//        List<PackItem> lpi = new ArrayList<>();
+//        lpi.add(pi);
+//        tripPackageVM.setPackItems(lpi);
+        launchNewPackItemFragment();
     }
 
     public void notifyPackItemRemoved(int position)
