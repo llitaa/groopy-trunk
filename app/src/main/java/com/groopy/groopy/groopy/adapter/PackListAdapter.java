@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.groopy.groopy.groopy.controller.TripPackActivity;
 import com.groopy.groopy.groopy.model.PackItem;
+import com.groopy.groopy.groopy.ui.ContextSearchUtils;
 import com.groopy.groopy.groopy.ui.PackItemView;
 
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
             {
                 int position = ViewHolder.this.getAdapterPosition();
                 removeItem(position);
-                TripPackActivity activity = getActivity(v);
+                TripPackActivity activity = ContextSearchUtils.GetTripPackActivity(v);
                 if (activity != null)
                 {
                     activity.notifyPackItemRemoved(position);
@@ -110,16 +111,5 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
             _packItemView.setSourceData(packItem);
             initListeners();
         }
-    }
-
-    public static TripPackActivity getActivity(View view) {
-        Context context = view.getContext();
-        while (context instanceof ContextWrapper) {
-            if (context instanceof Activity) {
-                return (TripPackActivity)context;
-            }
-            context = ((ContextWrapper)context).getBaseContext();
-        }
-        return null;
     }
 }
