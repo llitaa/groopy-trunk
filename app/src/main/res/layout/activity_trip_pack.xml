@@ -25,15 +25,6 @@
             android:orientation="vertical"
             tools:context=".controller.TripPackActivity">
 
-            <Button
-                android:id="@+id/_resetButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:background="@android:color/holo_green_dark"
-                android:text="Reset"
-                android:textColor="@android:color/white" />
-
             <include
                 layout="@layout/trip_package_view"
                 bind:tripPackage="@{tripPackage1}" />

@@ -14,37 +14,39 @@ import com.groopy.groopy.groopy.model.PackItem;
 import com.groopy.groopy.groopy.model.TripPackage;
 import com.groopy.groopy.groopy.ui.TripPackageView;
 import com.groopy.groopy.groopy.viewModel.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class TripPackActivity extends AppCompatActivity implements View.OnClickListener {
-    // private TripPackageViewModel _tripPackage = null;
+public class TripPackActivity extends AppCompatActivity
+{
     private ActivityTripPackBinding _binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         // Create view model
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
         tripPackageVM.setName("Kiew Trip");
-
         // Inflate layout
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_pack);
-
-        View resetButton = findViewById(R.id._resetButton);
-        resetButton.setOnClickListener(TripPackActivity.this);
-
         // Assign the component to a property in the binding class.
         _binding.setTripPackage1(tripPackageVM);
     }
 
-    public void onNewPackItemAddingCompleted() {
+    public void onNewPackItemRequested()
+    {
+        launchNewPackItemFragment();
+    }
+
+    public void onNewPackItemAddingCompleted()
+    {
         closeNewPackItemFragment();
     }
 
-    private void launchNewPackItemFragment() {
+    private void launchNewPackItemFragment()
+    {
         NewPackItemFragment npif = new NewPackItemFragment();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -52,10 +54,12 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
         transaction.commit();
     }
 
-    private void closeNewPackItemFragment() {
+    private void closeNewPackItemFragment()
+    {
         FragmentManager manager = getFragmentManager();
         NewPackItemFragment frg = (NewPackItemFragment) manager.findFragmentById(R.id.newPackItemFragmentContainer);
-        if (frg != null) {
+        if (frg != null)
+        {
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.remove(frg);
             transaction.commit();
@@ -68,24 +72,14 @@ public class TripPackActivity extends AppCompatActivity implements View.OnClickL
 //        _binding.setTripPackage(new TripPackage("Tenerife Tour"));
 //    }
 
-    @Override
-    public void onClick(View v) {
-//        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
-//        tripPackageVM.setName("Reseted");
-//        tripPackageVM.setDescription("No Description");
-//        PackItem pi = new PackItem("Reseted Item");
-//        List<PackItem> lpi = new ArrayList<>();
-//        lpi.add(pi);
-//        tripPackageVM.setPackItems(lpi);
-        launchNewPackItemFragment();
-    }
-
-    public void notifyPackItemRemoved(int position) {
+    public void notifyPackItemRemoved(int position)
+    {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
         tripPackageVM.removeItem(position);
     }
 
-    public void notifyPackItemAdded(PackItem item) {
+    public void notifyPackItemAdded(PackItem item)
+    {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
         // TODO (LYT) add adapter to view model and avoid this call
         List<PackItem> items = tripPackageVM.getPackItems();
