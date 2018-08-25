@@ -10,12 +10,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@android:color/darker_gray">
 
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light">
 
             <ImageView
                 android:id="@+id/_removeButton"
@@ -34,11 +35,10 @@
                 android:id="@+id/_itemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:textSize="15dp"
+                android:layout_toLeftOf="@+id/_removeButton"
                 android:background="@android:color/background_light"
                 android:textColor="@android:color/black"
-                android:layout_toLeftOf="@+id/_removeButton" />
+                android:textSize="20dp" />
 
         </RelativeLayout>
 
@@ -46,9 +46,10 @@
             android:id="@+id/_itemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:background="@android:color/holo_blue_bright"
-            android:textColor="@android:color/holo_blue_light" />
+            android:layout_marginBottom="2dp"
+            android:background="@android:color/background_light"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="15dp" />
 
     </LinearLayout>
 </layout>
