@@ -5,8 +5,13 @@ public class PackItem
 {
     public PackItem(String name)
     {
+        this(name, null);
+    }
+
+    public PackItem(String name, String description)
+    {
         _name = name;
-        _description = null;
+        _description = description;
     }
 
     public String getName()
