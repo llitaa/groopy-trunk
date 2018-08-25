@@ -1,11 +1,13 @@
 package com.groopy.groopy.groopy.controller;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,6 +35,12 @@ public class NewPackItemFragment extends Fragment implements View.OnClickListene
         approveItemBtn.setOnClickListener(NewPackItemFragment.this);
         ImageButton rejectItemBtn = getActivity().findViewById(R.id._rejectNewItem);
         rejectItemBtn.setOnClickListener(NewPackItemFragment.this);
+
+        // Simulate click on the item title edit text control
+        EditText titleTextView= getActivity().findViewById(R.id._title);
+        titleTextView.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(titleTextView, InputMethodManager.SHOW_IMPLICIT);
     }
 
     @Override
