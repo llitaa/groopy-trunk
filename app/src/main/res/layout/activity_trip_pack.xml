@@ -11,6 +11,10 @@
         <variable
             name="tripPackage1"
             type="com.groopy.groopy.groopy.viewModel.TripPackageViewModel" />
+
+        <variable
+            name="showInBagItems1"
+            type="java.lang.Boolean" />
     </data>
 
 
@@ -27,6 +31,7 @@
 
             <include
                 layout="@layout/trip_package_view"
+                bind:showInBagItems="@{showInBagItems1}"
                 bind:tripPackage="@{tripPackage1}" />
 
         </LinearLayout>
@@ -35,7 +40,7 @@
             android:id="@+id/newPackItemFragmentContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 

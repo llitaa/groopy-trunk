@@ -4,9 +4,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="tripPackage"
             type="com.groopy.groopy.groopy.viewModel.TripPackageViewModel" />
+
+        <variable
+            name="showInBagItems"
+            type="java.lang.Boolean" />
     </data>
 
     <com.groopy.groopy.groopy.ui.TripPackageView
@@ -18,8 +24,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:textSize="25dp"
-            android:text="@{tripPackage.name}" />
+            android:text="@{tripPackage.name}"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/_showNotPackedItemsBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:enabled="@{showInBagItems}"
+                android:text="Not Packed"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/_showInBagItemsBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:enabled="@{!showInBagItems}"
+                android:text="Packed"
+                android:textSize="20dp" />
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -39,11 +69,21 @@
                     android:background="@android:color/darker_gray"
                     android:descendantFocusability="blocksDescendants">
 
+                    <!--  List of items to pack  -->
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/packItems"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="@{showInBagItems ? View.GONE : View.VISIBLE}"
                         app:packItemsList="@{tripPackage.packItems}" />
+
+                    <!--  List of packed items  -->
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/_showInBagItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{showInBagItems ? View.VISIBLE : View.GONE}"
+                        app:packItemsList="@{tripPackage.inBagItems}" />
                 </RelativeLayout>
 
                 <ImageButton

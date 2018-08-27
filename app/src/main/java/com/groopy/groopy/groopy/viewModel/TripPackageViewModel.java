@@ -16,6 +16,10 @@ public class TripPackageViewModel extends ViewModel implements Observable
     protected String name;
     protected String description;
     protected List<PackItem> packItems;
+    protected List<PackItem> toPackItems;
+    protected List<PackItem> inBagItems;
+
+    // protected boolean showInBag;
 
     private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
     // Trip package model
@@ -32,6 +36,10 @@ public class TripPackageViewModel extends ViewModel implements Observable
         this.name = this.tripPackage.getName();
         this.description = this.tripPackage.getDescription();
         this.packItems = this.tripPackage.getItems();
+
+        this.toPackItems = this.tripPackage.getToPackItems();
+        this.inBagItems = this.tripPackage.getInBagItems();
+        // this.showInBag = false;
         notifyChange();
     }
 
@@ -82,11 +90,35 @@ public class TripPackageViewModel extends ViewModel implements Observable
         notifyChange();
     }
 
+    @Bindable
+    public List<PackItem> getToPackItems()
+    {
+        return this.toPackItems;
+    }
+
+    @Bindable
+    public List<PackItem> getInBagItems()
+    {
+        return this.inBagItems;
+    }
+
+//    @Bindable
+//    public boolean getShowInBag()
+//    {
+//        return this.showInBag;
+//    }
+//
+//    public void setShowInBag(boolean value)
+//    {
+//        this.showInBag = value;
+//        notifyPropertyChanged(BR.showInBag);
+//    }
+
     public void addItem(PackItem item, int position)
     {
         this.packItems.add(position, item);
         this.tripPackage.setItems(this.packItems);
-        // notifyChange();
+        notifyChange();
     }
 
     public void removeItem(int position)

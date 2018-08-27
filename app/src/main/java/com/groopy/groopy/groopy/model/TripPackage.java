@@ -6,6 +6,12 @@ import java.util.List;
 //! Class that represents single trip package
 public class TripPackage
 {
+    private String _name;
+    private List<PackItem> _items;
+    private String _description;
+    protected List<PackItem> _toPackItems;
+    protected List<PackItem> _inBagItems;
+
     public TripPackage(String name)
     {
         _name = name;
@@ -14,6 +20,8 @@ public class TripPackage
 
         // TODO remove this after default list generation logic will be implemented
         _items = createDefaultItems();
+        _toPackItems = createDefaultItems();
+        _inBagItems = new ArrayList<>();
     }
 
     public String getName()
@@ -59,7 +67,27 @@ public class TripPackage
         return res;
     }
 
-    private String _name;
-    private List<PackItem> _items;
-    private String _description;
+    public List<PackItem> getToPackItems() {
+        return _toPackItems;
+    }
+
+    public void setItemPacked(PackItem item) {
+        if (_toPackItems.contains(item))
+        {
+            _inBagItems.add(item);
+            _toPackItems.remove(item);
+        }
+    }
+
+    public void setItemUnPacked(PackItem item) {
+        if (_inBagItems.contains(item))
+        {
+            _toPackItems.add(item);
+            _inBagItems.remove(item);
+        }
+    }
+
+    public List<PackItem> getInBagItems() {
+        return _inBagItems;
+    }
 }

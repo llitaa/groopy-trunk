@@ -33,6 +33,7 @@ public class TripPackActivity extends AppCompatActivity
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_pack);
         // Assign the component to a property in the binding class.
         _binding.setTripPackage1(tripPackageVM);
+        _binding.setShowInBagItems1(false);
     }
 
     public void onNewPackItemRequested()
@@ -82,9 +83,10 @@ public class TripPackActivity extends AppCompatActivity
     {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
         // TODO (LYT) add adapter to view model and avoid this call
-        List<PackItem> items = tripPackageVM.getPackItems();
+        // List<PackItem> items = tripPackageVM.getPackItems();
         // int size = tripPackageVM.getPackItems().size();
-        items.add(item);
-        tripPackageVM.setPackItems(items);
+
+        int size = tripPackageVM.getPackItems().size();
+        tripPackageVM.addItem(item, size);
     }
 }
