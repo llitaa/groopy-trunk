@@ -79,6 +79,24 @@ public class TripPackage
         }
     }
 
+    public void addInBagItem(PackItem item) {
+        _inBagItems.add(item);
+    }
+
+    public void addToPackItem(int position, PackItem item) {
+        _toPackItems.add(position, item);
+    }
+
+    public void removeInBagItem(int pos) {
+        if (pos < _inBagItems.size())
+            _inBagItems.remove(pos);
+    }
+
+    public void removeToPackItem(int pos) {
+        if (pos < _toPackItems.size())
+            _toPackItems.remove(pos);
+    }
+
     public void setItemUnPacked(PackItem item) {
         if (_inBagItems.contains(item))
         {
@@ -90,4 +108,6 @@ public class TripPackage
     public List<PackItem> getInBagItems() {
         return _inBagItems;
     }
+
+
 }

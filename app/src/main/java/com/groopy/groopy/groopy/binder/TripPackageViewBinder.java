@@ -13,8 +13,8 @@ import java.util.List;
 
 public class TripPackageViewBinder
 {
-    @BindingAdapter("packItemsList")
-    public static void setTripPackageList(RecyclerView view, List<PackItem> list)
+    @BindingAdapter({"packItemsList", "itemClickListener"})
+    public static void setTripPackageList(RecyclerView view, List<PackItem> list, PackListAdapter.OnItemClickListener itemClickListener)
     {
         if (list == null)
         {
@@ -28,7 +28,7 @@ public class TripPackageViewBinder
         PackListAdapter adapter = (PackListAdapter) view.getAdapter();
         if (adapter == null)
         {
-            adapter = new PackListAdapter(view.getContext());
+            adapter = new PackListAdapter(view.getContext(), itemClickListener);
             view.setAdapter(adapter);
         }
         adapter.update(list);

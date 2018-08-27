@@ -6,12 +6,16 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewParent;
 
 import com.groopy.groopy.groopy.R;
+import com.groopy.groopy.groopy.adapter.PackListAdapter;
 import com.groopy.groopy.groopy.databinding.ActivityTripPackBinding;
 import com.groopy.groopy.groopy.model.PackItem;
 import com.groopy.groopy.groopy.model.TripPackage;
+import com.groopy.groopy.groopy.ui.PackItemView;
 import com.groopy.groopy.groopy.ui.TripPackageView;
 import com.groopy.groopy.groopy.viewModel.*;
 import java.util.ArrayList;
@@ -34,6 +38,7 @@ public class TripPackActivity extends AppCompatActivity
         // Assign the component to a property in the binding class.
         _binding.setTripPackage1(tripPackageVM);
         _binding.setShowInBagItems1(false);
+        _binding.setPackItemClickListener1(new TripPackageView.PackItemClickListener());
     }
 
     public void onNewPackItemRequested()
@@ -88,5 +93,19 @@ public class TripPackActivity extends AppCompatActivity
 
         int size = tripPackageVM.getPackItems().size();
         tripPackageVM.addItem(item, size);
+    }
+
+    public void notifyItemPacked(int position) {
+        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
+        PackItem item = tripPackageVM.getPackItems().get(position);
+        tripPackageVM.removeItem(position);
+        tripPackageVM.addInBagItem(item, tripPackageVM.getInBagItems().size());
+    }
+
+    public void notifyItemUnpacked(int position) {
+        TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
+        PackItem item = tripPackageVM.getInBagItems().get(position);
+        tripPackageVM.removeInBagItem(position);
+        tripPackageVM.addItem(item, tripPackageVM.getPackItems().size());
     }
 }

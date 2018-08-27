@@ -13,6 +13,11 @@
         <variable
             name="showInBagItems"
             type="java.lang.Boolean" />
+
+        <variable
+            name="packItemClickListener"
+            type="com.groopy.groopy.groopy.ui.TripPackageView.PackItemClickListener" />
+
     </data>
 
     <com.groopy.groopy.groopy.ui.TripPackageView
@@ -75,7 +80,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="@{showInBagItems ? View.GONE : View.VISIBLE}"
-                        app:packItemsList="@{tripPackage.packItems}" />
+                        app:packItemsList="@{tripPackage.packItems}"
+                        app:itemClickListener="@{packItemClickListener}"/>
 
                     <!--  List of packed items  -->
                     <android.support.v7.widget.RecyclerView
@@ -83,7 +89,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="@{showInBagItems ? View.VISIBLE : View.GONE}"
-                        app:packItemsList="@{tripPackage.inBagItems}" />
+                        app:packItemsList="@{tripPackage.inBagItems}"
+                        app:itemClickListener="@{packItemClickListener}" />
                 </RelativeLayout>
 
                 <ImageButton

@@ -19,12 +19,18 @@ import java.util.List;
 
 public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHolder>
 {
+    public interface OnItemClickListener {
+        void onPackItemClicked(PackItemView item, int itemPosition);
+    }
+
     private final LayoutInflater _inflater;
     private List<PackItem> _packItems = new ArrayList<>();
+    private final OnItemClickListener _listener;
 
-    public PackListAdapter(Context context)
+    public PackListAdapter(Context context, OnItemClickListener listener)
     {
         this._inflater = LayoutInflater.from(context);
+        this._listener = listener;
     }
 
     public void update(List<PackItem> list) {
@@ -50,7 +56,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
     public void onBindViewHolder(PackListAdapter.ViewHolder viewHolder, int position)
     {
         PackItem packItem = _packItems.get(position);
-        viewHolder.initContext(packItem, position);
+        viewHolder.initContext(packItem, _listener);
     }
 
     public void removeItem(int position)
@@ -106,9 +112,15 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
             }
         }
 
-        public void initContext(PackItem packItem, int position)
+        public void initContext(PackItem packItem, OnItemClickListener listener)
         {
             _packItemView.setSourceData(packItem);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    _listener.onPackItemClicked(_packItemView, ViewHolder.this.getAdapterPosition());
+                }
+            });
+
             initListeners();
         }
     }

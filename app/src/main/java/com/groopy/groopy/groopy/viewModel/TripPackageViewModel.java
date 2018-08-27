@@ -19,8 +19,6 @@ public class TripPackageViewModel extends ViewModel implements Observable
     protected List<PackItem> toPackItems;
     protected List<PackItem> inBagItems;
 
-    // protected boolean showInBag;
-
     private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
     // Trip package model
     private TripPackage tripPackage;
@@ -39,7 +37,6 @@ public class TripPackageViewModel extends ViewModel implements Observable
 
         this.toPackItems = this.tripPackage.getToPackItems();
         this.inBagItems = this.tripPackage.getInBagItems();
-        // this.showInBag = false;
         notifyChange();
     }
 
@@ -49,6 +46,9 @@ public class TripPackageViewModel extends ViewModel implements Observable
         this.name = tripPackage.getName();
         this.description = tripPackage.getDescription();
         this.packItems = tripPackage.getItems();
+
+        this.toPackItems = this.tripPackage.getToPackItems();
+        this.inBagItems = this.tripPackage.getInBagItems();
         notifyChange();
     }
 
@@ -102,29 +102,31 @@ public class TripPackageViewModel extends ViewModel implements Observable
         return this.inBagItems;
     }
 
-//    @Bindable
-//    public boolean getShowInBag()
-//    {
-//        return this.showInBag;
-//    }
-//
-//    public void setShowInBag(boolean value)
-//    {
-//        this.showInBag = value;
-//        notifyPropertyChanged(BR.showInBag);
-//    }
-
     public void addItem(PackItem item, int position)
     {
         this.packItems.add(position, item);
-        this.tripPackage.setItems(this.packItems);
+        this.tripPackage.addToPackItem(position, item);
         notifyChange();
     }
 
     public void removeItem(int position)
     {
         this.packItems.remove(position);
-        this.tripPackage.setItems(this.packItems);
+        this.tripPackage.removeToPackItem(position);
+        // notifyChange();
+    }
+
+    public void addInBagItem(PackItem item, int position)
+    {
+        this.inBagItems.add(position, item);
+        this.tripPackage.addInBagItem(item);
+        notifyChange();
+    }
+
+    public void removeInBagItem(int position)
+    {
+        this.inBagItems.remove(position);
+        this.tripPackage.removeInBagItem(position);
         // notifyChange();
     }
 

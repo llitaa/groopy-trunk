@@ -15,6 +15,10 @@
         <variable
             name="showInBagItems1"
             type="java.lang.Boolean" />
+
+        <variable
+            name="packItemClickListener1"
+            type="com.groopy.groopy.groopy.ui.TripPackageView.PackItemClickListener" />
     </data>
 
 
@@ -31,6 +35,7 @@
 
             <include
                 layout="@layout/trip_package_view"
+                bind:packItemClickListener="@{packItemClickListener1}"
                 bind:showInBagItems="@{showInBagItems1}"
                 bind:tripPackage="@{tripPackage1}" />
 
