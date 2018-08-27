@@ -76,16 +76,16 @@
 
                     <!--  List of items to pack  -->
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/packItems"
+                        android:id="@+id/_toPackItems"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="@{showInBagItems ? View.GONE : View.VISIBLE}"
-                        app:packItemsList="@{tripPackage.packItems}"
+                        app:packItemsList="@{tripPackage.toPackItems}"
                         app:itemClickListener="@{packItemClickListener}"/>
 
                     <!--  List of packed items  -->
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/_showInBagItems"
+                        android:id="@+id/_inBagItems"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="@{showInBagItems ? View.VISIBLE : View.GONE}"

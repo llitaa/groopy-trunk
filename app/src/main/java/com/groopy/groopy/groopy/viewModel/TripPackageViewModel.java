@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 import android.databinding.Observable;
 import android.databinding.PropertyChangeRegistry;
 
+import com.groopy.groopy.groopy.R;
 import com.groopy.groopy.groopy.model.PackItem;
 import com.groopy.groopy.groopy.model.TripPackage;
 import com.groopy.groopy.groopy.BR;
@@ -15,7 +16,6 @@ public class TripPackageViewModel extends ViewModel implements Observable
 {
     protected String name;
     protected String description;
-    protected List<PackItem> packItems;
     protected List<PackItem> toPackItems;
     protected List<PackItem> inBagItems;
 
@@ -33,10 +33,9 @@ public class TripPackageViewModel extends ViewModel implements Observable
         this.tripPackage = tripPackage;
         this.name = this.tripPackage.getName();
         this.description = this.tripPackage.getDescription();
-        this.packItems = this.tripPackage.getItems();
 
-        this.toPackItems = this.tripPackage.getToPackItems();
-        this.inBagItems = this.tripPackage.getInBagItems();
+        this.toPackItems = tripPackage.getToPackItems();
+        this.inBagItems = tripPackage.getInBagItems();
         notifyChange();
     }
 
@@ -45,7 +44,6 @@ public class TripPackageViewModel extends ViewModel implements Observable
         this.tripPackage = new TripPackage(name);
         this.name = tripPackage.getName();
         this.description = tripPackage.getDescription();
-        this.packItems = tripPackage.getItems();
 
         this.toPackItems = this.tripPackage.getToPackItems();
         this.inBagItems = this.tripPackage.getInBagItems();
@@ -78,22 +76,24 @@ public class TripPackageViewModel extends ViewModel implements Observable
     }
 
     @Bindable
-    public List<PackItem> getPackItems()
-    {
-        return this.packItems;
-    }
-
-    public void setPackItems(List<PackItem> items)
-    {
-        this.packItems = items;
-        this.tripPackage.setItems(this.packItems);
-        notifyChange();
-    }
-
-    @Bindable
     public List<PackItem> getToPackItems()
     {
         return this.toPackItems;
+    }
+
+    public void addToPackItem(PackItem item, int position)
+    {
+        this.toPackItems.add(position, item);
+        // this.tripPackage.addToPackItem(item);
+        notifyPropertyChanged(BR.toPackItems);
+        // notifyChange();
+    }
+
+    public void removeToPackItem(int position)
+    {
+        this.toPackItems.remove(position);
+        // this.tripPackage.removeToPackItem(position);
+        // notifyChange();
     }
 
     @Bindable
@@ -102,31 +102,18 @@ public class TripPackageViewModel extends ViewModel implements Observable
         return this.inBagItems;
     }
 
-    public void addItem(PackItem item, int position)
-    {
-        this.packItems.add(position, item);
-        this.tripPackage.addToPackItem(position, item);
-        notifyChange();
-    }
-
-    public void removeItem(int position)
-    {
-        this.packItems.remove(position);
-        this.tripPackage.removeToPackItem(position);
-        // notifyChange();
-    }
-
     public void addInBagItem(PackItem item, int position)
     {
         this.inBagItems.add(position, item);
-        this.tripPackage.addInBagItem(item);
-        notifyChange();
+        // this.tripPackage.addInBagItem(item);
+        notifyPropertyChanged(BR.inBagItems);
+        // notifyChange();
     }
 
     public void removeInBagItem(int position)
     {
         this.inBagItems.remove(position);
-        this.tripPackage.removeInBagItem(position);
+        // this.tripPackage.removeInBagItem(position);
         // notifyChange();
     }
 
@@ -161,6 +148,4 @@ public class TripPackageViewModel extends ViewModel implements Observable
     {
         this.callbacks.notifyCallbacks(this, fieldId, null);
     }
-
-
 }

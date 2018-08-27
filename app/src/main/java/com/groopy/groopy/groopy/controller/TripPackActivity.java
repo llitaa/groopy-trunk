@@ -81,7 +81,7 @@ public class TripPackActivity extends AppCompatActivity
     public void notifyPackItemRemoved(int position)
     {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
-        tripPackageVM.removeItem(position);
+        tripPackageVM.removeToPackItem(position);
     }
 
     public void notifyPackItemAdded(PackItem item)
@@ -91,14 +91,14 @@ public class TripPackActivity extends AppCompatActivity
         // List<PackItem> items = tripPackageVM.getPackItems();
         // int size = tripPackageVM.getPackItems().size();
 
-        int size = tripPackageVM.getPackItems().size();
-        tripPackageVM.addItem(item, size);
+        int size = tripPackageVM.getToPackItems().size();
+        tripPackageVM.addToPackItem(item, size);
     }
 
     public void notifyItemPacked(int position) {
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
-        PackItem item = tripPackageVM.getPackItems().get(position);
-        tripPackageVM.removeItem(position);
+        PackItem item = tripPackageVM.getToPackItems().get(position);
+        tripPackageVM.removeToPackItem(position);
         tripPackageVM.addInBagItem(item, tripPackageVM.getInBagItems().size());
     }
 
@@ -106,6 +106,6 @@ public class TripPackActivity extends AppCompatActivity
         TripPackageViewModel tripPackageVM = ViewModelProviders.of(this).get(TripPackageViewModel.class);
         PackItem item = tripPackageVM.getInBagItems().get(position);
         tripPackageVM.removeInBagItem(position);
-        tripPackageVM.addItem(item, tripPackageVM.getPackItems().size());
+        tripPackageVM.addToPackItem(item, tripPackageVM.getToPackItems().size());
     }
 }

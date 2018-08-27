@@ -90,11 +90,18 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
 
         public void initListeners()
         {
+            // Subscribe to item removed event
             _removeItemView = _packItemView.getRemoveItemView();
             if(_removeItemView != null)
             {
                 _removeItemView.setOnClickListener(ViewHolder.this);
             }
+            // Subscribe to item clicked event
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    _listener.onPackItemClicked(_packItemView, ViewHolder.this.getAdapterPosition());
+                }
+            });
         }
 
         @Override
@@ -115,12 +122,6 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.ViewHo
         public void initContext(PackItem packItem, OnItemClickListener listener)
         {
             _packItemView.setSourceData(packItem);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    _listener.onPackItemClicked(_packItemView, ViewHolder.this.getAdapterPosition());
-                }
-            });
-
             initListeners();
         }
     }

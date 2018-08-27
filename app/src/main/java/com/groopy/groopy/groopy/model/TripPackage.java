@@ -7,19 +7,16 @@ import java.util.List;
 public class TripPackage
 {
     private String _name;
-    private List<PackItem> _items;
     private String _description;
-    protected List<PackItem> _toPackItems;
-    protected List<PackItem> _inBagItems;
+    private List<PackItem> _toPackItems;
+    private List<PackItem> _inBagItems;
 
     public TripPackage(String name)
     {
         _name = name;
-        _items = new ArrayList<>();
         _description = null;
 
         // TODO remove this after default list generation logic will be implemented
-        _items = createDefaultItems();
         _toPackItems = createDefaultItems();
         _inBagItems = new ArrayList<>();
     }
@@ -32,16 +29,6 @@ public class TripPackage
     public void setName(String name)
     {
         _name = name;
-    }
-
-    public List<PackItem> getItems()
-    {
-        return _items;
-    }
-
-    public void setItems(List<PackItem> items)
-    {
-        _items = items;
     }
 
     public String getDescription()
@@ -71,20 +58,12 @@ public class TripPackage
         return _toPackItems;
     }
 
-    public void setItemPacked(PackItem item) {
-        if (_toPackItems.contains(item))
-        {
-            _inBagItems.add(item);
-            _toPackItems.remove(item);
-        }
-    }
-
     public void addInBagItem(PackItem item) {
         _inBagItems.add(item);
     }
 
-    public void addToPackItem(int position, PackItem item) {
-        _toPackItems.add(position, item);
+    public void addToPackItem(PackItem item) {
+        _toPackItems.add(item);
     }
 
     public void removeInBagItem(int pos) {
@@ -95,14 +74,6 @@ public class TripPackage
     public void removeToPackItem(int pos) {
         if (pos < _toPackItems.size())
             _toPackItems.remove(pos);
-    }
-
-    public void setItemUnPacked(PackItem item) {
-        if (_inBagItems.contains(item))
-        {
-            _toPackItems.add(item);
-            _inBagItems.remove(item);
-        }
     }
 
     public List<PackItem> getInBagItems() {

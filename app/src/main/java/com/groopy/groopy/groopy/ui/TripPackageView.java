@@ -74,10 +74,10 @@ public class TripPackageView extends LinearLayout implements View.OnClickListene
                 TripPackActivity activity = ContextSearchUtils.GetTripPackActivity(item);
                 if (adapter != null && activity != null) {
                     int viewId = rv.getId();
-                    if (viewId == R.id.packItems) {
+                    if (viewId == R.id._toPackItems) {
                         adapter.removeItem(position);
                         activity.notifyItemPacked(position);
-                    } else if (viewId == R.id._showInBagItems) {
+                    } else if (viewId == R.id._inBagItems) {
                         adapter.removeItem(position);
                         activity.notifyItemUnpacked(position);
                     }
