@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
 
-    private static final String DOMAIN_NAME = "tabian.ca";
+    // private static final String DOMAIN_NAME = "tabian.ca";
 
     //widgets
     private EditText mEmail, mPassword, mConfirmPassword;
@@ -145,10 +145,16 @@ public class RegisterActivity extends AppCompatActivity {
      * @return
      */
     private boolean isValidDomain(String email){
-        Log.d(TAG, "isValidDomain: verifying email has correct domain: " + email);
-        String domain = email.substring(email.indexOf("@") + 1).toLowerCase();
-        Log.d(TAG, "isValidDomain: users domain: " + domain);
-        return domain.equals(DOMAIN_NAME);
+        return true;
+
+        // TODO (LYT) check if the string is a valid email
+
+        // "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$"
+
+//        Log.d(TAG, "isValidDomain: verifying email has correct domain: " + email);
+//        String domain = email.substring(email.indexOf("@") + 1).toLowerCase();
+//        Log.d(TAG, "isValidDomain: users domain: " + domain);
+//        return domain.equals(DOMAIN_NAME);
     }
 
     /**
