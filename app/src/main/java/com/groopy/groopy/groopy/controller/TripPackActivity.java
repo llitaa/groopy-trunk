@@ -22,12 +22,14 @@ import com.groopy.groopy.groopy.ui.TripPackageView;
 import com.groopy.groopy.groopy.viewModel.*;
 
 
-public class TripPackActivity extends AppCompatActivity {
-    private static final String TAG = "TripPackActivity";
+public class TripPackActivity extends AuthenticationAwareActivity {
+    // private static final String TAG = "TripPackActivity";
 
-    // User authentiacation listener in Firebase
-    private FirebaseAuth.AuthStateListener _authListener;
     private ActivityTripPackBinding _binding;
+
+    public String getTag() {
+        return "TripPackActivity";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,23 +45,6 @@ public class TripPackActivity extends AppCompatActivity {
         _binding.setTripPackage1(tripPackageVM);
         _binding.setShowInBagItems1(false);
         _binding.setPackItemClickListener1(new TripPackageView.PackItemClickListener());
-        // Set up data base content
-        setupFirebaseAuth();
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(_authListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (_authListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(_authListener);
-        }
     }
 
     @Override
@@ -84,48 +69,13 @@ public class TripPackActivity extends AppCompatActivity {
         }
     }
 
-    private void signOut(){
-        Log.d(TAG, "signOut: signing out");
-        FirebaseAuth.getInstance().signOut();
-    }
-
-    private void setupFirebaseAuth(){
-        Log.d(TAG, "setupFirebaseAuth: started.");
-
-        _authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-
-                } else {
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                    Intent intent = new Intent(TripPackActivity.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        };
-    }
-
-    private void checkAuthenticationState() {
-        Log.d(TAG, "checkAuthenticationState: checking authentication state.");
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user == null) {
-            Log.d(TAG, "checkAuthenticationState: user is null, navigating back to login screen.");
-
-            Intent intent = new Intent(TripPackActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        } else {
-            Log.d(TAG, "checkAuthenticationState: user is authenticated.");
-        }
+    @Override
+    public void onUserSignedOut() {
+        Log.d(getTag(), "authenticationState: user is not defined, navigating back to login screen.");
+        Intent intent = new Intent(TripPackActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void onNewPackItemRequested() {
@@ -157,7 +107,7 @@ public class TripPackActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "on resumed");
+        Log.d(getTag(), "on resumed");
         checkAuthenticationState();
     }
 
