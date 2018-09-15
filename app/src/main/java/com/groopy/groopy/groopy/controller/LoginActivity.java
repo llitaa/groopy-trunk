@@ -39,14 +39,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mEmail = (EditText) findViewById(R.id.email);
-        mPassword = (EditText) findViewById(R.id.password);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mEmail = findViewById(R.id.email);
+        mPassword = findViewById(R.id.password);
+        mProgressBar = findViewById(R.id.progressBar);
 
         FirebaseApp.initializeApp(this);
         setupFirebaseAuth();
 
-        Button signIn = (Button) findViewById(R.id.email_sign_in_button);
+        Button signIn = findViewById(R.id.email_sign_in_button);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView register = (TextView) findViewById(R.id.link_register);
+        TextView register = findViewById(R.id.link_register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView resetPassword = (TextView) findViewById(R.id.forgot_password);
+        TextView resetPassword = findViewById(R.id.forgot_password);
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView resendEmailVerification = (TextView) findViewById(R.id.resend_verification_email);
+        TextView resendEmailVerification = findViewById(R.id.resend_verification_email);
         resendEmailVerification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,8 +153,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.isEmailVerified()) {
                         Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                         Toast.makeText(LoginActivity.this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-
-//                        Intent intent = new Intent(LoginActivity.this, SignedInActivity.class);
 
                         Intent intent = new Intent(LoginActivity.this, TripPackActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
