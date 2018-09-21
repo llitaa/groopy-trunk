@@ -15,11 +15,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.groopy.groopy.groopy.R;
+import com.groopy.groopy.groopy.dataBase.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,9 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
 
-    // private static final String DOMAIN_NAME = "tabian.ca";
-
-    //widgets
     private EditText mEmail, mPassword, mConfirmPassword;
     private Button mRegister;
     private ProgressBar mProgressBar;
@@ -40,11 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mEmail = (EditText) findViewById(R.id.input_email);
-        mPassword = (EditText) findViewById(R.id.input_password);
-        mConfirmPassword = (EditText) findViewById(R.id.input_confirm_password);
-        mRegister = (Button) findViewById(R.id.btn_register);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mEmail = findViewById(R.id.input_email);
+        mPassword = findViewById(R.id.input_password);
+        mConfirmPassword = findViewById(R.id.input_confirm_password);
+        mRegister = findViewById(R.id.btn_register);
+        mProgressBar = findViewById(R.id.progressBar);
 
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                         && !isEmpty(mPassword.getText().toString())
                         && !isEmpty(mConfirmPassword.getText().toString())) {
 
-                    //check if user has a company email address
+                    //check if user has a valid email address
                     if (isEmailValid(mEmail.getText().toString())) {
 
                         //check if passwords match
@@ -70,17 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(RegisterActivity.this, "Please Specify valid E-Mail address", Toast.LENGTH_SHORT).show();
                     }
-
                 } else {
                     Toast.makeText(RegisterActivity.this, "You must fill out all the fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         hideSoftKeyboard();
-
     }
-
 
     /**
      * Register a new email and password to Firebase Authentication
@@ -100,22 +97,38 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: AuthState: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-                            //send email verificaiton
                             sendVerificationEmail();
 
-                            FirebaseAuth.getInstance().signOut();
-
-                            //redirect the user to the login screen
-                            redirectLoginScreen();
+                            //insert some default data
+                            String currentUserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            User user = createDefaultUser(email, currentUserUID);
+                            FirebaseDatabase.getInstance().getReference()
+                                    .child(getString(R.string.dbnode_users))
+                                    .child(currentUserUID)
+                                    .setValue(user)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Log.d(TAG, "data base: successfully updated user data.");
+                                            FirebaseAuth.getInstance().signOut();
+                                            redirectLoginScreen();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d(TAG, "data base: failed to update user data.");
+                                    Log.d(TAG, e.toString());
+                                    Toast.makeText(RegisterActivity.this, "something went wrong.", Toast.LENGTH_SHORT).show();
+                                    FirebaseAuth.getInstance().signOut();
+                                    redirectLoginScreen();
+                                }
+                            });
                         }
                         if (!task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Unable to Register",
                                     Toast.LENGTH_SHORT).show();
                         }
                         hideDialog();
-
-                        // ...
                     }
                 });
     }
@@ -192,7 +205,6 @@ public class RegisterActivity extends AppCompatActivity {
         return string.equals("");
     }
 
-
     private void showDialog() {
         mProgressBar.setVisibility(View.VISIBLE);
 
@@ -208,7 +220,15 @@ public class RegisterActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-
+    static private User createDefaultUser(final String email, final String uid)
+    {
+        User user = new User();
+        user.setName(email.substring(0, email.indexOf("@")));
+        user.setPhone("1");
+        user.setProfile_image("");
+        user.setUser_id(uid);
+        return user;
+    }
 }
 
 

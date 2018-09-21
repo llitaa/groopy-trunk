@@ -26,8 +26,6 @@ import com.groopy.groopy.groopy.R;
 
 
 public class SettingsActivity extends AuthenticationAwareActivity {
-    private static final String DOMAIN_NAME = "tabian.ca";
-
     //widgets
     private EditText mEmail, mCurrentPassword;
     private Button mSave;
